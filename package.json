@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://nexolabz.github.io/n1_realestate/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
