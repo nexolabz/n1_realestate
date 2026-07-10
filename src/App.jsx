@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/n1_realestate">
 
       <Navbar />
 
