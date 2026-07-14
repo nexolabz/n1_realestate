@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Properties from "./pages/Properties";
 import PropertyDetails from "./pages/PropertyDetails";
 import Contact from "./pages/Contact";
+import Testimonials from "./components/Testimonials";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,8 @@ function App() {
         <Route path="/properties/:id" element={<PropertyDetails />} />
 
         <Route path="/contact" element={<Contact />} />
+
+        <Route path="/testimonials" element={<Testimonials />} />
 
         <Route path="/login" element={<Login />} />
 

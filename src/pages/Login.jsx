@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import villa6 from "../assets/images/villa6.jpg";
+import villa6 from "../assets/images/villa6.webp";
 
 const Login = () => {
   return (

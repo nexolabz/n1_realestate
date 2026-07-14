@@ -1,11 +1,11 @@
 import PropertyCard from "./PropertyCard";
 
-import img1 from "../assets/images/villa1.jpg";
-import img2 from "../assets/images/villa2.jpg";
-import img3 from "../assets/images/villa3.jpg";
-import img4 from "../assets/images/villa4.jpg";
-import img5 from "../assets/images/villa5.jpg";
-import img6 from "../assets/images/villa6.jpg";
+import img1 from "../assets/images/villa1.webp";
+import img2 from "../assets/images/villa2.webp";
+import img3 from "../assets/images/villa3.webp";
+import img4 from "../assets/images/villa4.webp";
+import img5 from "../assets/images/villa5.webp";
+import img6 from "../assets/images/villa6.webp";
 
 const properties = [
   {

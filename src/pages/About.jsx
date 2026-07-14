@@ -1,7 +1,7 @@
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
-import villa9 from "../assets/images/villa9.jpg";
+import villa9 from "../assets/images/villa9.webp";
 
 const About = () => {
   return (

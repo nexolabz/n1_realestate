@@ -1,4 +1,4 @@
-import iron from "../assets/images/image6.png";
+import iron from "../assets/images/image6.webp";
 
 const Hero = () => {
   return (

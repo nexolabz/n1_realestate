@@ -1,4 +1,4 @@
-import house from "../assets/images/image2.jpg";
+import house from "../assets/images/image2.webp";
 
 const DreamHome = () => {
   return (

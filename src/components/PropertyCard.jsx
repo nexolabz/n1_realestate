@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   FaLocationDot,
   FaBed,
@@ -17,6 +18,32 @@ const PropertyCard = ({
   area,
   price,
 }) => {
+  
+  const [favorite, setFavorite] = useState(() => {
+  const favorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
+  return favorites.includes(id);
+});
+
+useEffect(() => {
+  let favorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (favorite) {
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+    }
+  } else {
+    favorites = favorites.filter((item) => item !== id);
+  }
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favorites)
+  );
+}, [favorite, id]);
+
   return (
     <div className="group bg-white rounded-[30px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
 
@@ -42,11 +69,16 @@ const PropertyCard = ({
 
         {/* Wishlist */}
 
-        <button className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white flex items-center justify-center shadow-md hover:bg-[#A67C52] hover:text-white transition duration-300">
-
-          <FaHeart />
-
-        </button>
+        <button
+  onClick={() => setFavorite(!favorite)}
+  className={`absolute top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center shadow-md transition duration-300 ${
+    favorite
+      ? "bg-red-500 text-white"
+      : "bg-white text-gray-500 hover:bg-[#A67C52] hover:text-white"
+  }`}
+>
+  <FaHeart />
+</button>
 
       </div>
 

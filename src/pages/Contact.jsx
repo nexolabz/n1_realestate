@@ -1,7 +1,7 @@
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
-import villa7 from "../assets/images/villa7.jpg";
+import villa7 from "../assets/images/villa7.webp";
 
 const Contact = () => {
   return (

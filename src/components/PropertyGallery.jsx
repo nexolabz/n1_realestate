@@ -1,8 +1,8 @@
-import villa1 from "../assets/images/villa1.jpg";
-import interior1 from "../assets/images/interior1.jpg";
-import living1 from "../assets/images/living1.jpg";
-import kitchen1 from "../assets/images/kitchen1.jpg";
-import pool1 from "../assets/images/pool1.jpg";
+import villa1 from "../assets/images/villa1.webp";
+import interior1 from "../assets/images/interior1.webp";
+import living1 from "../assets/images/living1.webp";
+import kitchen1 from "../assets/images/kitchen1.webp";
+import pool1 from "../assets/images/pool1.webp";
 
 const PropertyGallery = () => {
   return (
