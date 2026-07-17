@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 import { FiSearch } from "react-icons/fi";
 
@@ -18,34 +19,44 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+      }}
+      className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-24 px-4 md:px-6 lg:px-8">
 
         {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center gap-4"
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         >
+          <Link
+            to="/"
+            className="flex items-center gap-3"
+          >
+            <img
+              src={Logo}
+              alt="Homyz"
+              className="w-20 h-20 object-contain"
+            />
 
-          <img
-            src={Logo}
-            alt="Homyz"
-            className="w-24 h-24 object-contain"
-          />
+            <div className="leading-tight">
+              <h1 className="text-4xl font-extrabold text-[#A67C52]">
+                Homyz
+              </h1>
 
-          <div className="leading-tight">
-
-            <h1 className="text-4xl font-extrabold text-[#A67C52]">
-              Homyz
-            </h1>
-
-            <p className="text-sm text-gray-500 mt-1">
-              Luxury Real Estate
-            </p>
-
-          </div>
-
-        </Link>
+              <p className="text-sm text-gray-500">
+                Luxury Real Estate
+              </p>
+            </div>
+          </Link>
+        </motion.div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-10">
@@ -71,12 +82,17 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-4">
 
-          <Link
-            to="/login"
-            className="bg-[#A67C52] text-white px-7 py-3 rounded-full hover:bg-[#8B6843] hover:shadow-xl hover:scale-105 transition-all duration-300"
+          <motion.div
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Login
-          </Link>
+            <Link
+              to="/login"
+              className="bg-[#A67C52] text-white px-7 py-3 rounded-full hover:bg-[#8B6843] transition-all duration-300"
+            >
+              Login
+            </Link>
+          </motion.div>
 
         </div>
 
@@ -94,12 +110,22 @@ const Navbar = () => {
       {/* Mobile Menu */}
 
       {menuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden bg-white shadow-lg"
+        >
 
           <ul className="flex flex-col items-center gap-6 py-6">
 
             {navItems.map((item) => (
-              <li key={item.name}>
+              <motion.li
+                key={item.name}
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.2 }}
+              >
                 <NavLink
                   to={item.path}
                   onClick={() => setMenuOpen(false)}
@@ -111,7 +137,7 @@ const Navbar = () => {
                 >
                   {item.name}
                 </NavLink>
-              </li>
+              </motion.li>
             ))}
 
             <Link
@@ -124,9 +150,9 @@ const Navbar = () => {
 
           </ul>
 
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 

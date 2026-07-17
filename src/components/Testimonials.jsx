@@ -1,4 +1,5 @@
 import { FaStar, FaQuoteLeft } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 import user1 from "../assets/images/user1.webp";
 import user2 from "../assets/images/user2.webp";
@@ -31,18 +32,48 @@ const reviews = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
+
 const Testimonials = () => {
   return (
     <section
       id="testimonial"
-      className="py-20 md:py-28 bg-white"
+      className="py-20 md:py-28 bg-white overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
 
         {/* Heading */}
 
-        <div className="text-center mb-16">
-
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <p className="text-[#A67C52] uppercase tracking-widest font-semibold">
             Testimonials
           </p>
@@ -54,38 +85,67 @@ const Testimonials = () => {
           <p className="mt-5 text-lg text-gray-600 max-w-2xl mx-auto">
             Trusted by thousands of happy customers across India.
           </p>
-
-        </div>
+        </motion.div>
 
         {/* Cards */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {reviews.map((item) => (
-
-            <div
+            <motion.div
               key={item.id}
-              className="relative bg-[#FCFAF7] rounded-[30px] p-6 md:p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
+              variants={cardVariants}
+              whileHover={{
+                y: -12,
+                scale: 1.03,
+                boxShadow: "0px 25px 45px rgba(0,0,0,0.12)",
+              }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-[#FCFAF7] rounded-[30px] p-6 md:p-8 shadow-lg overflow-hidden group cursor-pointer"
             >
+              {/* Background Glow */}
+
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#A67C52]/10 to-transparent opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.4 }}
+              />
 
               {/* Quote */}
 
-              <div className="absolute top-8 right-8 text-5xl text-[#A67C52]/20">
+              <motion.div
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 5,
+                }}
+                className="absolute top-8 right-8 text-5xl text-[#A67C52]/20"
+              >
                 <FaQuoteLeft />
-              </div>
+              </motion.div>
 
               {/* User */}
 
-              <div className="flex items-center gap-4">
+              <div className="relative z-10 flex items-center gap-4">
 
-                <img
+                <motion.img
                   src={item.image}
                   alt={item.name}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                  }}
+                  transition={{ duration: 0.3 }}
                   className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-4 border-[#E8D8CB]"
                 />
 
                 <div>
-
                   <h3 className="text-xl font-bold">
                     {item.name}
                   </h3>
@@ -93,34 +153,41 @@ const Testimonials = () => {
                   <p className="text-gray-500">
                     {item.role}
                   </p>
-
                 </div>
 
               </div>
 
               {/* Rating */}
 
-              <div className="flex gap-1 text-yellow-400 mt-6">
-
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-
-              </div>
+              <motion.div
+                className="relative z-10 flex gap-1 text-yellow-400 mt-6"
+                whileHover={{
+                  scale: 1.08,
+                }}
+              >
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <motion.div
+                    key={star}
+                    whileHover={{
+                      scale: 1.4,
+                      rotate: 360,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FaStar />
+                  </motion.div>
+                ))}
+              </motion.div>
 
               {/* Review */}
 
-              <p className="mt-6 text-gray-600 leading-8">
+              <p className="relative z-10 mt-6 text-gray-600 leading-8">
                 {item.review}
               </p>
 
-            </div>
-
+            </motion.div>
           ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

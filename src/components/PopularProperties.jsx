@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
 
 import img1 from "../assets/images/villa1.webp";
@@ -70,11 +71,34 @@ const properties = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
+
 const PopularProperties = () => {
   return (
     <section
       id="properties"
-      className="bg-[#FCFAF7] py-20 md:py-28"
+      className="bg-[#FCFAF7] py-20 md:py-28 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
 
@@ -82,8 +106,12 @@ const PopularProperties = () => {
 
         <div className="flex flex-col lg:flex-row justify-between items-center mb-16">
 
-          <div>
-
+          <motion.div
+            initial={{ x: -80, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <p className="text-[#A67C52] uppercase tracking-widest font-semibold">
               Our Collection
             </p>
@@ -96,34 +124,53 @@ const PopularProperties = () => {
               Explore our handpicked luxury properties in India's most desirable
               locations. Find the perfect home that matches your lifestyle.
             </p>
+          </motion.div>
 
-          </div>
-
-          <button className="mt-8 lg:mt-0 w-full sm:w-auto bg-[#A67C52] text-white px-8 py-4 rounded-full hover:bg-[#8B6843] hover:scale-105 transition-all duration-300">
+          <motion.button
+            initial={{ x: 80, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            whileHover={{
+              scale: 1.08,
+              y: -4,
+              boxShadow: "0px 15px 30px rgba(166,124,82,0.35)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-8 lg:mt-0 w-full sm:w-auto bg-[#A67C52] text-white px-8 py-4 rounded-full"
+          >
             View All Properties
-          </button>
+          </motion.button>
 
         </div>
 
         {/* Cards */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10"
+        >
           {properties.map((property) => (
-            <PropertyCard
+            <motion.div
               key={property.id}
-              id={property.id}
-              image={property.image}
-              title={property.title}
-              location={property.location}
-              bedrooms={property.bedrooms}
-              bathrooms={property.bathrooms}
-              area={property.area}
-              price={property.price}
-            />
+              variants={itemVariants}
+            >
+              <PropertyCard
+                id={property.id}
+                image={property.image}
+                title={property.title}
+                location={property.location}
+                bedrooms={property.bedrooms}
+                bathrooms={property.bathrooms}
+                area={property.area}
+                price={property.price}
+              />
+            </motion.div>
           ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

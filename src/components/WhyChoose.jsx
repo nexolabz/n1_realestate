@@ -4,6 +4,7 @@ import {
   FaClipboardCheck,
   FaHeadset,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -32,15 +33,45 @@ const services = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
+
 const WhyChoose = () => {
   return (
-    <section className="bg-[#FCFAF7] py-20 md:py-28">
+    <section className="bg-[#FCFAF7] py-20 md:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
 
         {/* Heading */}
 
-        <div className="text-center mb-16">
-
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <p className="text-[#A67C52] font-semibold uppercase tracking-widest">
             Why Choose Us
           </p>
@@ -54,49 +85,65 @@ const WhyChoose = () => {
             verified properties, transparent deals, and exceptional customer
             support.
           </p>
-
-        </div>
+        </motion.div>
 
         {/* Cards */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {services.map((service) => (
-
-            <div
+            <motion.div
               key={service.id}
-             className="bg-white rounded-3xl p-6 md:p-8 shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.02] transition-all duration-300 group"
+              variants={cardVariants}
+              whileHover={{
+                y: -12,
+                scale: 1.03,
+                boxShadow: "0px 20px 40px rgba(0,0,0,0.12)",
+              }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-3xl p-6 md:p-8 shadow-lg group cursor-pointer overflow-hidden relative"
             >
+              {/* Background Glow */}
+
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#A67C52]/10 to-transparent opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.4 }}
+              />
 
               {/* Icon */}
 
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#F8F4EF] flex items-center justify-center text-4xl text-[#A67C52] group-hover:bg-[#A67C52] group-hover:text-white transition-all duration-300">
-
+              <motion.div
+                whileHover={{
+                  rotate: 360,
+                  scale: 1.15,
+                }}
+                transition={{
+                  duration: 0.6,
+                }}
+                className="relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#F8F4EF] flex items-center justify-center text-4xl text-[#A67C52] group-hover:bg-[#A67C52] group-hover:text-white transition-all duration-300"
+              >
                 {service.icon}
-
-              </div>
+              </motion.div>
 
               {/* Title */}
 
-              <h3 className="text-xl md:text-2xl font-bold mt-6 text-gray-900">
-
+              <h3 className="relative z-10 text-xl md:text-2xl font-bold mt-6 text-gray-900">
                 {service.title}
-
               </h3>
 
               {/* Description */}
 
-              <p className="mt-5 text-gray-600 leading-7">
-
+              <p className="relative z-10 mt-5 text-gray-600 leading-7">
                 {service.desc}
-
               </p>
-
-            </div>
-
+            </motion.div>
           ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -5,6 +5,7 @@ import WhyChoose from "../components/WhyChoose";
 import PopularProperties from "../components/PopularProperties";
 import Testimonials from "../components/Testimonials";
 import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 
 const Home = () => {
@@ -15,8 +16,8 @@ const Home = () => {
       <DreamHome />
       <WhyChoose />
       <PopularProperties />
-        <Testimonials />
-         <Newsletter />
+      <Newsletter />
+      <Footer/> 
     </>
   );
 };

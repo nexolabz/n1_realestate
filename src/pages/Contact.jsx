@@ -1,18 +1,45 @@
+import { motion } from "framer-motion";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
 import villa7 from "../assets/images/villa7.webp";
 
+const container = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+    },
+  },
+};
+
+const item = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
+
 const Contact = () => {
   return (
     <>
-      {/* Banner */}
+      {/* Hero Banner */}
 
-      <section className="relative mt-20 h-[400px]">
+      <section className="relative mt-20 h-[400px] overflow-hidden">
 
-        <img
+        <motion.img
           src={villa7}
           alt="Contact"
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5 }}
           className="w-full h-full object-cover"
         />
 
@@ -20,105 +47,155 @@ const Contact = () => {
 
         <div className="absolute inset-0 flex items-center justify-center">
 
-          <div className="text-center text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            className="text-center text-white"
+          >
 
             <p className="uppercase tracking-[6px] text-[#D4A373]">
               Contact Us
             </p>
 
-            <h1 className="text-6xl font-bold mt-5">
+            <h1 className="text-4xl md:text-6xl font-bold mt-5">
               Get In Touch
             </h1>
 
-          </div>
+          </motion.div>
 
         </div>
 
       </section>
 
-      {/* Contact */}
+      {/* Contact Section */}
 
-      <section className="bg-[#FCFAF7] py-24">
+      <section className="bg-[#FCFAF7] py-24 overflow-hidden">
 
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+        <div className="max-w-7xl mx-auto px-6">
 
-          {/* Left */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid lg:grid-cols-2 gap-16"
+          >
 
-          <div>
+            {/* Left */}
 
-            <p className="text-[#A67C52] font-semibold uppercase">
-              Contact Information
-            </p>
+            <motion.div variants={item}>
 
-            <h2 className="text-5xl font-bold mt-4">
-              We'd Love To Hear From You
-            </h2>
+              <p className="text-[#A67C52] font-semibold uppercase">
+                Contact Information
+              </p>
 
-            <p className="text-gray-600 mt-6 leading-8">
-              Whether you're looking to buy, sell, or rent a property,
-              our team is here to help you every step of the way.
-            </p>
+              <h2 className="text-4xl md:text-5xl font-bold mt-4">
+                We'd Love To Hear From You
+              </h2>
 
-            <div className="mt-10 space-y-6">
+              <p className="text-gray-600 mt-6 leading-8">
+                Whether you're looking to buy, sell, or rent a property,
+                our team is here to help you every step of the way.
+              </p>
 
-              <div>
-                <h4 className="font-bold">📍 Address</h4>
-                <p className="text-gray-500">
-                  Bhopal, Madhya Pradesh, India
-                </p>
+              <div className="mt-10 space-y-6">
+
+                {[
+                  {
+                    title: "📍 Address",
+                    value: "Bhopal, Madhya Pradesh, India",
+                  },
+                  {
+                    title: "📞 Phone",
+                    value: "+91 98765 43210",
+                  },
+                  {
+                    title: "✉ Email",
+                    value: "info@homyz.com",
+                  },
+                ].map((info, index) => (
+
+                  <motion.div
+                    key={index}
+                    whileHover={{
+                      x: 8,
+                      scale: 1.02,
+                    }}
+                    className="bg-white rounded-2xl shadow-md p-5"
+                  >
+
+                    <h4 className="font-bold">
+                      {info.title}
+                    </h4>
+
+                    <p className="text-gray-500 mt-2">
+                      {info.value}
+                    </p>
+
+                  </motion.div>
+
+                ))}
+
               </div>
 
-              <div>
-                <h4 className="font-bold">📞 Phone</h4>
-                <p className="text-gray-500">
-                  +91 98765 43210
-                </p>
-              </div>
+            </motion.div>
 
-              <div>
-                <h4 className="font-bold">✉ Email</h4>
-                <p className="text-gray-500">
-                  info@homyz.com
-                </p>
-              </div>
+            {/* Contact Form */}
 
-            </div>
+            <motion.div
+              variants={item}
+              whileHover={{
+                y: -5,
+              }}
+              className="bg-white p-8 rounded-[30px] shadow-xl"
+            >
 
-          </div>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                placeholder="Full Name"
+                className="w-full border p-4 rounded-xl mb-5 outline-none focus:border-[#A67C52] transition"
+              />
 
-          {/* Form */}
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="email"
+                placeholder="Email"
+                className="w-full border p-4 rounded-xl mb-5 outline-none focus:border-[#A67C52] transition"
+              />
 
-          <div className="bg-white p-8 rounded-[30px] shadow-xl">
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                placeholder="Subject"
+                className="w-full border p-4 rounded-xl mb-5 outline-none focus:border-[#A67C52] transition"
+              />
 
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full border p-4 rounded-xl mb-5 outline-none"
-            />
+              <motion.textarea
+                whileFocus={{ scale: 1.02 }}
+                rows="6"
+                placeholder="Message"
+                className="w-full border p-4 rounded-xl outline-none focus:border-[#A67C52] transition"
+              />
 
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border p-4 rounded-xl mb-5 outline-none"
-            />
+              <motion.button
+                whileHover={{
+                  scale: 1.03,
+                  y: -3,
+                  boxShadow: "0px 20px 40px rgba(166,124,82,0.35)",
+                }}
+                whileTap={{
+                  scale: 0.95,
+                }}
+                className="mt-6 w-full bg-[#A67C52] text-white py-4 rounded-xl"
+              >
+                Send Message
+              </motion.button>
 
-            <input
-              type="text"
-              placeholder="Subject"
-              className="w-full border p-4 rounded-xl mb-5 outline-none"
-            />
+            </motion.div>
 
-            <textarea
-              rows="6"
-              placeholder="Message"
-              className="w-full border p-4 rounded-xl outline-none"
-            ></textarea>
-
-            <button className="mt-6 w-full bg-[#A67C52] text-white py-4 rounded-xl hover:bg-[#8B6843] transition">
-              Send Message
-            </button>
-
-          </div>
+          </motion.div>
 
         </div>
 
@@ -126,7 +203,6 @@ const Contact = () => {
 
       <Newsletter />
       <Footer />
-
     </>
   );
 };
